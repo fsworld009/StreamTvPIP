@@ -1,0 +1,15 @@
+{
+    "common":{
+        "apply": "Apply",
+        "cancel": "Cancel",
+        "open": "Open",
+        "left": "Left",
+        "right": "Right",
+        "language": "Language"
+    },
+    "info":{
+        "changeLog": "Change Log",
+        "projectGitHub": "Project GitHub",
+        "reportIssues": "Report Issues"
+    }
+}

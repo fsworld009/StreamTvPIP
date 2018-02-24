@@ -1,0 +1,41 @@
+{
+  "base": "semantic/",
+  "paths": {
+    "source": {
+      "config": "src/theme.config",
+      "definitions": "src/definitions/",
+      "site": "src/site/",
+      "themes": "src/themes/"
+    },
+    "output": {
+        "packaged": "../source/semantic/",
+        "uncompressed": "../source/semantic/components/",
+        "compressed": "../source/semantic/components/",
+        "themes": "../source/semantic/themes/"
+      },
+    "clean": "../source/semantic/"
+  },
+  "components": [
+    "reset",
+    "site",
+    "button",
+    "divider",
+    "dimmer",
+    "header",
+    "icon",
+    "input",
+    "label",
+    "segment",
+    "form",
+    "menu",
+    "grid",
+    "checkbox",
+    "dropdown",
+    "modal",
+    "transition"
+  ],
+  "permission": false,
+  "autoInstall": false,
+  "rtl": false,
+  "version": "2.2.13"
+}

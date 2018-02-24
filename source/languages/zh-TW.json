@@ -1,0 +1,15 @@
+{
+    "common":{
+        "apply": "套用",
+        "cancel": "取消",
+        "open": "開啟",
+        "language": "語言",
+        "left": "左",
+        "right": "右"
+    },
+    "info":{
+        "changeLog": "更新紀錄(英文)",
+        "projectGitHub": "專案GitHub",
+        "reportIssues": "回報問題"
+    }
+}
