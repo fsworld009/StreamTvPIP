@@ -14,7 +14,9 @@
         <SeButton :key="index" :class="'ui button '+button.styleClasses" @click="onAction(button.action)">{{button.text}}</SeButton>
       </template>
       <!-- <button class="ui button red inverted cancel">Close</button> -->
+      <slot name="footer"></slot>
     </div>
+    
   </div>
 </template>
 

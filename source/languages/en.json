@@ -7,6 +7,12 @@
         "right": "Right",
         "language": "Language"
     },
+    "options":{
+        "main":"Main Stream",
+        "sub":"Sub Stream",
+        "site": "Site",
+        "channelId": "Channel ID"
+    },
     "info":{
         "changeLog": "Change Log",
         "projectGitHub": "Project GitHub",
