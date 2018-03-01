@@ -5,11 +5,10 @@ import VueLang from "./plugins/vue-lang.js";
 Vue.use(Vuex);
 
 
-// import getQueryParams from './queryParams.js';
-// let queryParams = getQueryParams(["main","sub"]);
+import {getQueryParams, updateQueryParams} from './queryParams.js';
+let queryParams = getQueryParams(["main","sub"]);
 import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, UPDATE_LANG, UPDATE_LANG_LIST, CHANGE_LANG_CODE, SWAP_STREAM_ORDER} from "./mutations.js";
 import {LOAD_LANG_LIST, LOAD_LANG} from "./actions.js";
-
 
 const sessionStorageKey = 'StreamTvPIP';
 let session = sessionStorage.getItem(sessionStorageKey) || "{}";
@@ -18,18 +17,16 @@ let initialState =  Object.assign({
     // sessionId: 1,
     main: {
         site: "twitch",
-        channel: ""
+        channel: queryParams.main
     },
     sub: {
         site: "twitch",
-        channel: ""
+        channel: queryParams.sub
     },
     showOptionFlag: true,
     langCode: "en"
   //   savedSessions: []
 }, JSON.parse(session));
-
-
 
 let defaultLangCode = "en";
 initialState.langList = [];
@@ -40,10 +37,8 @@ Vue.use(VueLang, {
 });
 
 
-
-
 function saveSession(state){
-    sessionStorage.setItem(sessionStorageKey, JSON.stringify(state));
+    sessionStorage.setItem(sessionStorageKey, JSON.stringify({langCode: state.langCode}));
 }
 
 function loadLang(langCode, commit){
@@ -101,36 +96,14 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-    //   [RESET_ARRAY](state, payload){
-    //     if(payload.width && payload.height){
-    //         state.width = Number(payload.width);
-    //         state.height = Number(payload.height);
-    //     }
-
-    //     state.showOptionFlag = false;
-
-    //     for(let i=0; i< state.width*state.height; i++){
-    //         if(!state.streams[i]){
-    //             Vue.set(state.streams, i, {
-    //                 id: i,
-    //                 order: i
-    //             });
-    //         }
-    //     }
-
-    //     saveSession(state);
-
-    //   },
       [UPDATE_STREAM](state, payload){
         let options = payload.options;
         state.main = options.main;
         state.sub = options.sub;
-        state.showOptionFlag = false;
-        // saveSession(state);
-      },
-      [SHOW_ARRAY_OPTIONS](state, payload){
-        state.showOptionFlag = true;
-        saveSession(state);
+        updateQueryParams({
+            main: state.main.channel,
+            sub: state.sub.channel
+        });
       },
 
       [CHANGE_LANG_CODE](state, payload){

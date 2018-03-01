@@ -8,18 +8,11 @@
       </div>
     </template>
     <template v-else> 
-      <!-- <StreamContainer position="main"/> -->
-      <!-- <component :is="'StreamTwitch'" :options="stream"  :style="streamColStyle" @streamLoad="onStreamLoad"/> -->
-      <!-- <template v-if="hasStream"> -->
-        <!-- <StreamTwitch :options="streamOptions.main"  v-if="hasStream"/> -->
-        <template v-if="showOptions">
-          <Options @close="onCloseOptionsModal"/>
-        </template>
-        <StreamWrapper :hasStream="hasStream" , :streamOptions="streamOptions"/>
+      <template v-if="showOptions">
+        <Options @close="onCloseOptionsModal"/>
       </template>
-      
-      
-    <!--</template>-->
+      <StreamWrapper :hasStream="hasStream" , :streamOptions="streamOptions"/>
+    </template>
   </div>
 </template>
 
@@ -39,7 +32,6 @@ export default {
   
   data (){
     var state = this.$store.state;
-    console.log("state",state)
     return {
       loading: true
     };
@@ -61,7 +53,12 @@ export default {
         sub: {
           site: state.sub.site,
           channel: state.sub.channel,
-          openChat: false
+          openChat: false,
+          showChat: true,
+          chatOpacity: 50,
+          chatPosition: "right",
+          chatWidth: 30,
+          chatExpandOnHover: false
         }
       };
     },

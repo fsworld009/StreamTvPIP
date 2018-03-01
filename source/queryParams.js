@@ -16,4 +16,25 @@ function getQueryParams(paramNames){
     return params;
 }
 
-export default getQueryParams;
+function constructQueryParams(params){
+    let paramNames = Object.keys(params);
+    let paramList=[];
+    paramNames.forEach((paramName)=>{
+        paramList.push(paramName + "=" + params[paramName]);
+    });
+    // 
+    return  paramList.join("&");
+}
+
+function updateQueryParams(params){
+    let newUrl = constructQueryParams(params);
+    let urlBase = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    urlBase = urlBase + "?" + newUrl;
+    history.pushState(null, null, urlBase);
+}
+
+module.exports = {
+    getQueryParams: getQueryParams,
+    constructQueryParams: constructQueryParams,
+    updateQueryParams: updateQueryParams
+};
