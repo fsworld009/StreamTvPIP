@@ -1,22 +1,31 @@
 <template>
   <div>
+        
+      
     <template v-if="loading">
       <div class="stream-col overlay-text stream-overlay">
         <h1 class="text white"><i class=" spinner loading icon"></i></h1>
       </div>
     </template>
     <template v-else> 
-      <!-- <StreamContainer/> -->
-      <template v-if="showOptions">
-        <Options></Options>
+      <!-- <StreamContainer position="main"/> -->
+      <!-- <component :is="'StreamTwitch'" :options="stream"  :style="streamColStyle" @streamLoad="onStreamLoad"/> -->
+      <!-- <template v-if="hasStream"> -->
+        <!-- <StreamTwitch :options="streamOptions.main"  v-if="hasStream"/> -->
+        <template v-if="showOptions">
+          <Options @close="onCloseOptionsModal"/>
+        </template>
+        <StreamWrapper :hasStream="hasStream" , :streamOptions="streamOptions"/>
       </template>
-    </template>
+      
+      
+    <!--</template>-->
   </div>
 </template>
 
 <script>
 import Options from './components/Options.vue';
-// import StreamContainer from './components/StreamContainer.vue';
+import StreamWrapper from './components/StreamWrapper.vue';
 import {mapState, mapGetters} from 'vuex';
 import {LOAD_LANG_LIST, LOAD_LANG} from './actions.js';
 import {PAGE_LOADED} from './mutations.js';
@@ -24,18 +33,43 @@ import {PAGE_LOADED} from './mutations.js';
 export default {
   components: {
     Options,
-  //   StreamContainer
+    // StreamTwitch,
+    StreamWrapper
   },
   
   data (){
     var state = this.$store.state;
+    console.log("state",state)
     return {
-      
       loading: true
     };
   },
 
-  computed: mapGetters(['showOptions']),
+  computed: Object.assign(mapGetters(['showOptions']), mapState({
+    streamOptions(state){
+      return {
+        main: {
+          site: state.main.site,
+          channel: state.main.channel,
+          openChat: true,
+          showChat: true,
+          chatOpacity: 50,
+          chatPosition: "right",
+          chatWidth: 30,
+          chatExpandOnHover: false
+        },
+        sub: {
+          site: state.sub.site,
+          channel: state.sub.channel,
+          openChat: false
+        }
+      };
+    },
+    hasStream(state){
+      return state.main.channel && state.sub.channel? true:false;
+    }
+    
+  })),
 
   mounted(){
 
@@ -62,7 +96,10 @@ export default {
 
   
   methods: {
-    
+    onCloseOptionsModal(){
+      // this.showOptions=false;
+      // this.hasStream=true;
+    }
   }
 };
 </script>

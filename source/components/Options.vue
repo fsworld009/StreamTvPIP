@@ -82,22 +82,6 @@ export default {
     }
   },
   computed: mapState({
-    // showSaveLoadSection(state){
-    //   return state.savedSessions.length > 0;
-    // },
-    // width(state){
-    //   return state.width==0? 2: state.width;
-    // },
-    // height(state){
-    //   return state.height==0? 2: state.height;
-    // },
-    // savedSessionsTest(state){
-    //   return [
-    //     {text:"[2x2] ch1...,ch2...,ch3...,ch4...", value: 1},
-    //     {text:"[1x3] ch1...,ch2...,ch3", value: 2}
-    //   ];
-      
-    // },
 
     modalOptions(state){
       var closeble = false;//state.width != 0 && state.height != 0;
@@ -122,6 +106,10 @@ export default {
 
     languages(state){
       return state.langList
+    },
+
+    streamOptions(state){
+      return state.streams;
     }
   }),
 
@@ -139,9 +127,7 @@ export default {
         $form.find('input, textarea, select').each(function(i, field) {
           data[field.name] = field.value;
         });
-      }
-
-      let options = {
+        let options = {
         main: {
           site: data.mainSite,
           channel: data.mainChannel
@@ -149,15 +135,18 @@ export default {
         sub: {
           site: data.subSite,
           channel: data.subChannel
-        }
-      };
+          }
+        };
 
-      this.$store.commit(
-        {
-          type: UPDATE_STREAM,
-          options: options
-        }
-      );
+        this.$store.commit(
+          {
+            type: UPDATE_STREAM,
+            options: options
+          }
+        );
+        $el.modal("hide");
+        this.$emit("close");
+      }
     },
 
     onLangCodeChange(value, text, $choice){

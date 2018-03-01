@@ -24,7 +24,7 @@ let initialState =  Object.assign({
         site: "twitch",
         channel: ""
     },
-    showOptionFlag: false,
+    showOptionFlag: true,
     langCode: "en"
   //   savedSessions: []
 }, JSON.parse(session));
@@ -60,7 +60,7 @@ const store = new Vuex.Store({
     state: initialState,
     getters: {
         showOptions(state){
-            return state.showOptionFlag || true;
+            return state.showOptionFlag;
         }
     //   savedSessionsById(state){
     //     return _.keyBy(state.savedSessions, "id");
@@ -125,7 +125,8 @@ const store = new Vuex.Store({
         let options = payload.options;
         state.main = options.main;
         state.sub = options.sub;
-        saveSession(state);
+        state.showOptionFlag = false;
+        // saveSession(state);
       },
       [SHOW_ARRAY_OPTIONS](state, payload){
         state.showOptionFlag = true;
