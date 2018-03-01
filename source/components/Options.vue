@@ -21,7 +21,7 @@
             <Dropdown class="" name="langCode" :items="languages" :value="$lang.langCode()" :label="$lang('common.language')" @change="onLangCodeChange" :disabled="disableLangList"></Dropdown>
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             <pre style="overflow:auto">
-02.24.2018
+03.01.2018
 First Version
             </pre>
             <!-- <h5 class="ui dividing header">Load Sessions</h5>

@@ -17,7 +17,7 @@
     height: 100%;
     z-index: 2;
   }
-  
+
   .stream-col.overlay-text > h1 {
     position: relative;
     text-align: center;
@@ -52,7 +52,7 @@
     /* right: 0; */
     top: 0;
     /* width: 25%; */
-    height: 100%;
+    height: calc(100% - 45px);
     z-index: 3;
     /* opacity: 0; */
     transition: opacity 0.5s;
@@ -78,4 +78,10 @@
     width: 320px;
     height: 180px;
     z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
+
+.sub-stream:hover {
+    opacity: 1 !important;
+  }
