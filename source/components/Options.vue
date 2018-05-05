@@ -21,6 +21,8 @@
             <Dropdown class="" name="langCode" :items="languages" :value="$lang.langCode()" :label="$lang('common.language')" @change="onLangCodeChange" :disabled="disableLangList"></Dropdown>
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             <pre style="overflow:auto">
+05.05.2018
+Fix Chatroom Url
 03.01.2018
 First Version
             </pre>
